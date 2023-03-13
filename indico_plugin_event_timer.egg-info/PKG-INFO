@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: indico-plugin-event-timer
+Version: 3.2
+Summary: A countdown timer for events
+Home-page: https://github.com/aflynn50/indico-event-timer-plugin
+Author: Alastair Flynn
+Author-email: alastair.flynn@canonical.com
+License: MIT
+Classifier: Environment :: Plugins
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: <3.11,>=3.9.0
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
