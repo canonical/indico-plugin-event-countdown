@@ -1,0 +1,11 @@
+setup.cfg
+setup.py
+indico_plugin_event_timer.egg-info/PKG-INFO
+indico_plugin_event_timer.egg-info/SOURCES.txt
+indico_plugin_event_timer.egg-info/dependency_links.txt
+indico_plugin_event_timer.egg-info/entry_points.txt
+indico_plugin_event_timer.egg-info/not-zip-safe
+indico_plugin_event_timer.egg-info/requires.txt
+indico_plugin_event_timer.egg-info/top_level.txt
+indico_timer_plugin/__init__.py
+indico_timer_plugin/plugin.py
