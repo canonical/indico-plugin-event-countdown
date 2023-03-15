@@ -1,13 +1,13 @@
 {
   "build": {
-    "clientPath": "/home/aflynn50/dev/indico/timer_plugin/indico_timer_plugin/client",
-    "distPath": "/home/aflynn50/dev/indico/timer_plugin/indico_timer_plugin/static/dist",
+    "clientPath": "/home/aflynn50/dev/indico/plugins/timer_plugin/indico_timer_plugin/client",
+    "distPath": "/home/aflynn50/dev/indico/plugins/timer_plugin/indico_timer_plugin/static/dist",
     "distURL": "/static/plugins/timer_plugin/dist/",
     "indicoSourcePath": "/home/aflynn50/dev/indico/src",
-    "rootPath": "/home/aflynn50/dev/indico/timer_plugin/indico_timer_plugin",
-    "staticPath": "/home/aflynn50/dev/indico/timer_plugin/indico_timer_plugin/static",
+    "rootPath": "/home/aflynn50/dev/indico/plugins/timer_plugin/indico_timer_plugin",
+    "staticPath": "/home/aflynn50/dev/indico/plugins/timer_plugin/indico_timer_plugin/static",
     "staticURL": "/static/plugins/timer_plugin/",
-    "urlMapPath": "/home/aflynn50/dev/indico/timer_plugin/url_map.json"
+    "urlMapPath": "/home/aflynn50/dev/indico/plugins/timer_plugin/url_map.json"
   },
   "indico": {
     "build": {

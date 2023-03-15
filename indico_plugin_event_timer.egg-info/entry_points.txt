@@ -1,2 +1,2 @@
 [indico.plugins]
-canonical_event_timer = indico_timer_plugin.plugin:TimerPlugin
+timer_plugin = indico_timer_plugin.plugin:TimerPlugin
