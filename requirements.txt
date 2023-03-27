@@ -1,0 +1,5 @@
+indico==3.2.3
+flask_moment==1.0.5
+Flask_PluginEngine==0.4.1
+setuptools==67.6.0
+WTForms==3.0.1
