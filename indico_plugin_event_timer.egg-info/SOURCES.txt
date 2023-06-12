@@ -10,6 +10,5 @@ indico_plugin_event_timer.egg-info/requires.txt
 indico_plugin_event_timer.egg-info/top_level.txt
 indico_timer_plugin/__init__.py
 indico_timer_plugin/plugin.py
-indico_timer_plugin/static/dist/manifest.json
-indico_timer_plugin/static/dist/js/main.351a89d6.bundle.js
+indico_timer_plugin/templates/event_timer_settings.html
 indico_timer_plugin/templates/timer_plugin_clock.html

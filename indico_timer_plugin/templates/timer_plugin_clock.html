@@ -12,11 +12,11 @@ function startTime() {
   let m = moment.duration({{ time_to_event }}*1000, 'milliseconds');
   m = m.subtract(moment.duration(interval, 'milliseconds'))
 
-  document.getElementById('event_count_down').innerHTML = "months is" +
-            m.months() + "weeks is" + m.weeks()
-        + "days is:" + m.days()
-        + "hours are: " + m.hours()
-        + "secpmds are@ " + m.seconds();
+  document.getElementById('event_count_down').innerHTML = "months are" +
+            m.months() + " weeks are" + m.weeks()
+        + " days are:" + m.days()
+        + " hours are: " + m.hours()
+        + " seconds are: " + m.seconds();
   interval = interval + 1000
   setTimeout(startTime, 1000);
 }
