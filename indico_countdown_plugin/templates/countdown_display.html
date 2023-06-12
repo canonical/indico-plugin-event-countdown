@@ -1,0 +1,62 @@
+<style>
+  #event_countdown {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  #event_countdown .event_countdown_number {
+    font-size: 4rem;
+    display: block;
+    padding: 1rem;
+  }
+  #event_countdown > span {
+    padding: 1rem;
+    display: inline-block;
+  }
+</style>
+<div class="action-box highlight" id="event_countdown">
+  <span><span class="event_countdown_number" id="event_countdown_days"></span> days</span>
+  <span><span class="event_countdown_number" id="event_countdown_hours"></span> hours</span>
+  <span><span class="event_countdown_number" id="event_countdown_minutes"></span> minutes</span>
+  <span><span class="event_countdown_number" id="event_countdown_seconds"></span> seconds</span>
+</div>
+<script>
+(function startTimer() {
+  function timercall() {
+    let now = new Date()
+    let diff = ((end - now) / 1000) | 0;
+
+    
+    let seconds = diff % 60;
+    let minutes = ((diff / 60) % 60) | 0;
+    let hours = ((diff / 3600) % 24) | 0;
+    let days = (diff / 86400) | 0
+
+    dayElem.textContent = days;
+    hourElem.textContent = hours == 0 ? 0 : hours.toString().padStart(2, "0");
+    minuteElem.textContent = minutes == 0 ? 0 : minutes.toString().padStart(2, "0");
+    secondElem.textContent = seconds == 0 ? 0 : seconds.toString().padStart(2, "0");
+
+    if (diff > 0) {
+      requestAnimationFrame(timercall)
+    }
+  }
+  let end = new Date("{{event.start_dt_display}}")
+  let granularity = "{{granularity}}";
+  let dayElem = document.querySelector("#event_countdown_days");
+  let hourElem = document.querySelector("#event_countdown_hours");
+  let minuteElem = document.querySelector("#event_countdown_minutes");
+  let secondElem = document.querySelector("#event_countdown_seconds");
+
+  if (granularity != "second") {
+    secondElem.parentNode.style.display = "none";
+    if (granularity != "minute") {
+      minuteElem.parentNode.style.display = "none";
+      if (granularity != "hour") {
+	hourElem.parentNode.style.display = "none";
+      }
+    }
+  }
+
+  requestAnimationFrame(timercall)
+})();
+</script>
