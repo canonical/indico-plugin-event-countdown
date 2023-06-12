@@ -1,2 +1,0 @@
-[indico.plugins]
-timer_plugin = indico_timer_plugin.plugin:TimerPlugin
