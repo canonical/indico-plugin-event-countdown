@@ -49,9 +49,9 @@ for plugin in $PLUGINS; do
     elif [[ "$ACTION" == "extract" ]]; then
         TRANSLATIONS_DIR="./indico_${plugin}/translations"
         [[ ! -d "$TRANSLATIONS_DIR" ]] && mkdir "$TRANSLATIONS_DIR"
-        pybabel extract -o "${TRANSLATIONS_DIR}/messages.pot" "indico_${plugin}" -F babel.cfg
+        pybabel extract -o "${TRANSLATIONS_DIR}/messages.pot" "indico_${plugin}" -F babel.cfg --omit-header
         num_strings=$(grep msgid "${TRANSLATIONS_DIR}/messages.pot" | wc -l)
-        if (( $num_strings == 1 )); then
+        if (( $num_strings == 0 )); then
             echo "deleting empty dict ${TRANSLATIONS_DIR}/messages.pot"
             rm "${TRANSLATIONS_DIR}/messages.pot"
         fi
