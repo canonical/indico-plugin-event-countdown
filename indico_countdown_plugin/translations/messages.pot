@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-13 00:44+0200\n"
+"POT-Creation-Date: 2023-06-27 20:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,8 +49,44 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: indico_countdown_plugin/plugin.py:53
+#: indico_countdown_plugin/plugin.py:56
 msgid "Countdown"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:29
+msgid "Conference begins in"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:33
+msgid "weeks"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:34
+msgid "day"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:35
+msgid "hour"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:36
+msgid "minutes"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:37
+msgid "seconds"
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:39
+#, python-format
+msgid "The wait is over and %(event_title)s has officially begun."
+msgstr ""
+
+#: indico_countdown_plugin/templates/countdown_display.html:41
+#, python-format
+msgid ""
+"Access the %(link_start)s timetable %(link_end)s to start your conference"
+" journey."
 msgstr ""
 
 #: indico_countdown_plugin/templates/event_countdown_settings.html:8

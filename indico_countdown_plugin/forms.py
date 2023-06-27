@@ -18,6 +18,6 @@ class EventCountdownSettingsForm(IndicoForm):
             ("second", _("Seconds")),
             ("minute", _("Minutes")),
             ("hour", _("Hours")),
-            ("days", _("Days")),
+            ("day", _("Days")),
         ],
     )
