@@ -1,62 +1,118 @@
 <style>
-  #event_countdown {
-    text-transform: uppercase;
+  #event-countdown .event-countdown-timeframe {
     text-align: center;
   }
-  #event_countdown .event_countdown_number {
+  #event-countdown .event-countdown-timeslice {
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 1rem;
+  }
+  #event-countdown .event-countdown-number {
     font-size: 4rem;
     display: block;
     padding: 1rem;
   }
-  #event_countdown > span {
-    padding: 1rem;
+  #event-countdown .event-countdown-complete {
     display: inline-block;
+    padding: 1rem;
+  }
+  #event-countdown:not(.complete) .event-countdown-complete,
+  #event-countdown.complete .event-countdown-timeslice,
+  #event-countdown.complete .event-countdown-header {
+    display: none;
   }
 </style>
-<div class="action-box highlight" id="event_countdown">
-  <span><span class="event_countdown_number" id="event_countdown_days"></span> days</span>
-  <span><span class="event_countdown_number" id="event_countdown_hours"></span> hours</span>
-  <span><span class="event_countdown_number" id="event_countdown_minutes"></span> minutes</span>
-  <span><span class="event_countdown_number" id="event_countdown_seconds"></span> seconds</span>
+<div class="action-box highlight" id="event-countdown">
+  <div class="section">
+  <div class="text">
+    <div class="label event-countdown-header">
+      {% trans %}Conference begins in{% endtrans %}
+    </div>
+  </div>
+  <div class="text event-countdown-timeframe">
+    <span class="event-countdown-timeslice"><span class="event-countdown-number" id="event-countdown-weeks"></span> {% trans %}weeks{% endtrans %}</span>
+    <span class="event-countdown-timeslice"><span class="event-countdown-number" id="event-countdown-days"></span> {% trans %}day{% endtrans %}s</span>
+    <span class="event-countdown-timeslice"><span class="event-countdown-number" id="event-countdown-hours"></span> {% trans %}hour{% endtrans %}s</span>
+    <span class="event-countdown-timeslice"><span class="event-countdown-number" id="event-countdown-minutes"></span> {% trans %}minutes{% endtrans %}</span>
+    <span class="event-countdown-timeslice"><span class="event-countdown-number" id="event-countdown-seconds"></span> {% trans %}seconds{% endtrans %}</span>
+    <span class="event-countdown-complete">
+      {% trans event_title=event.title %}The wait is over and {{event_title}} has officially begun.{% endtrans %}
+      {% if published %}
+      {% trans link_start='<a href="{{event.url}}timetable">'|safe, link_end='</a>'|safe %}Access the {{ link_start }} timetable {{link_end}} to start your conference journey.{% endtrans %}
+      {% endif %}
+      </span>
+  </div>
 </div>
 <script>
 (function startTimer() {
   function timercall() {
-    let now = new Date()
-    let diff = ((end - now) / 1000) | 0;
+    let now = new Date();
+    let next = new Date(now);
+    let diff = ((END - now) / 1000) | 0;
 
-    
     let seconds = diff % 60;
     let minutes = ((diff / 60) % 60) | 0;
     let hours = ((diff / 3600) % 24) | 0;
-    let days = (diff / 86400) | 0
+    let days = (diff / 86400 % 7) | 0;
+    let weeks = (diff / 604800) | 0;
 
+    weekElem.textContent = weeks;
     dayElem.textContent = days;
-    hourElem.textContent = hours == 0 ? 0 : hours.toString().padStart(2, "0");
-    minuteElem.textContent = minutes == 0 ? 0 : minutes.toString().padStart(2, "0");
-    secondElem.textContent = seconds == 0 ? 0 : seconds.toString().padStart(2, "0");
+    hourElem.textContent = diff < 86400 ? hours : hours.toString().padStart(2, "0");
+    minuteElem.textContent = diff < 3600 ? minutes : minutes.toString().padStart(2, "0");
+    secondElem.textContent = diff < 10 ? seconds : seconds.toString().padStart(2, "0");
 
-    if (diff > 0) {
-      requestAnimationFrame(timercall)
+    if (weeks == 0) {
+      weekElem.parentNode.style.display = "none";
+      if (days == 0) {
+        dayElem.parentNode.style.display = "none";
+        if (hours == 0) {
+          hourElem.parentNode.style.display = "none";
+        }
+      }
+    }
+
+    if (GRANULARITY == "day") {
+      next.setHours(24, 0, 0, 0);
+    } else if (GRANULARITY == "hour") {
+      next.setMinutes(60, 0, 0);
+    } else if (GRANULARITY == "minute") {
+      next.setSeconds(60, 0);
+    } else if (GRANULARITY == "second") {
+      next.setMilliseconds(1000, 0);
+    }
+
+    next -= now;
+
+    if (diff <= 0) {
+      document.querySelector("#event-countdown").classList.add("complete");
+    } else if (next < SMOOTH_TIMEOUT_LIMIT) {
+      requestAnimationFrame(timercall);
+    } else {
+      setTimeout(() => requestAnimationFrame(timercall), next - SMOOTH_TIMEOUT_LIMIT);
     }
   }
-  let end = new Date("{{event.start_dt_display}}")
-  let granularity = "{{granularity}}";
-  let dayElem = document.querySelector("#event_countdown_days");
-  let hourElem = document.querySelector("#event_countdown_hours");
-  let minuteElem = document.querySelector("#event_countdown_minutes");
-  let secondElem = document.querySelector("#event_countdown_seconds");
 
-  if (granularity != "second") {
+  const SMOOTH_TIMEOUT_LIMIT = 250;
+  const GRANULARITY = "{{granularity}}";
+  const END = new Date("{{event.start_dt_display}}");
+
+  let weekElem = document.querySelector("#event-countdown-weeks");
+  let dayElem = document.querySelector("#event-countdown-days");
+  let hourElem = document.querySelector("#event-countdown-hours");
+  let minuteElem = document.querySelector("#event-countdown-minutes");
+  let secondElem = document.querySelector("#event-countdown-seconds");
+
+  if (GRANULARITY != "second") {
     secondElem.parentNode.style.display = "none";
-    if (granularity != "minute") {
+    if (GRANULARITY != "minute") {
       minuteElem.parentNode.style.display = "none";
-      if (granularity != "hour") {
-	hourElem.parentNode.style.display = "none";
+      if (GRANULARITY != "hour") {
+        hourElem.parentNode.style.display = "none";
       }
     }
   }
 
-  requestAnimationFrame(timercall)
+  requestAnimationFrame(timercall);
 })();
 </script>

@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from flask_pluginengine import render_plugin_template
 from indico.core import signals
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint, url_for_plugin
+from indico.modules.events.contributions import contribution_settings
 from indico.web.menu import SideMenuItem
 
 from . import _
@@ -20,7 +21,6 @@ class CountdownPlugin(IndicoPlugin):
     def init(self):
         super().init()
         self.template_hook("conference-home-info", self._inject_plugin_template)
-        # self.inject_bundle('main.js', WPBase)
         self.connect(
             signals.menu.items,
             self._inject_menuitems,
@@ -40,11 +40,14 @@ class CountdownPlugin(IndicoPlugin):
             return
 
         if datetime.now(timezone.utc) >= (event.start_dt_override or event.start_dt):
-            return
+            pass
 
         granularity = self.event_settings.get(event, "granularity")
         return render_plugin_template(
-            "countdown_display.html", event=event, granularity=granularity
+            "countdown_display.html",
+            event=event,
+            granularity=granularity,
+            published=contribution_settings.get(event, 'published')
         )
 
     def _inject_menuitems(self, sender, event, **kwargs):
