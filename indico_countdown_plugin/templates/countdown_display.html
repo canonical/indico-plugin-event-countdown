@@ -38,7 +38,7 @@
     <span class="event-countdown-complete">
       {% trans event_title=event.title %}The wait is over and {{event_title}} has officially begun.{% endtrans %}
       {% if published %}
-      {% trans link_start='<a href="{{event.url}}timetable">'|safe, link_end='</a>'|safe %}Access the {{ link_start }} timetable {{link_end}} to start your conference journey.{% endtrans %}
+      {% trans link_start='<a href="./timetable">'|safe, link_end='</a>'|safe %}Access the {{ link_start }} timetable {{link_end}} to start your conference journey.{% endtrans %}
       {% endif %}
       </span>
   </div>
