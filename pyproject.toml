@@ -1,0 +1,51 @@
+[project]
+name = "indico-plugin-event-countdown"
+version = "3.3"
+description = "A countdown timer for indico events"
+readme = "README.md"
+requires-python = ">=3.9.0"
+license = { file = "LICENSE" }
+keywords = ["indico", "events", "countdown"]
+authors = [
+  { name = "Philipp Kewisch", email = "code@kewis.ch" },
+  { name = "Alastair Flynn", email = "alastair.flynn@canonical.com" }
+]
+classifiers = [
+    "Environment :: Plugins",
+    "Environment :: Web Environment",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+]
+
+[project.urls]
+repository = "https://github.com/canonical/indico-plugin-event-countdown"
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "isort",
+  "flake8",
+  "Flake8-pyproject",
+  "tox"
+]
+
+[project.entry-points."indico.plugins"]
+countdown = "indico_countdown_plugin.plugin:CountdownPlugin"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.flake8]
+ignore = ["E203", "E266", "E501", "W503"]
+max-line-length = 100
+max-complexity = 18
+select = ["B","C","E","F","W","T4"]
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 100
+
