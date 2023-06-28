@@ -47,7 +47,7 @@ class CountdownPlugin(IndicoPlugin):
             "countdown_display.html",
             event=event,
             granularity=granularity,
-            published=contribution_settings.get(event, 'published')
+            published=contribution_settings.get(event, "published"),
         )
 
     def _inject_menuitems(self, sender, event, **kwargs):

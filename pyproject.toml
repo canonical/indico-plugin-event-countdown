@@ -24,7 +24,7 @@ dev = [
   "black",
   "isort",
   "flake8",
-  "Flake8-pyproject",
+  "pyproject-flake8",
   "tox"
 ]
 
@@ -48,4 +48,27 @@ include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
 line_length = 100
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = lint
+skipsdist = true
+
+[testenv:lint]
+description = Check code against coding style standards
+deps =
+  black
+  isort
+  flake8
+  pyproject-flake8
+allowlist_externals =
+  npm
+commands_pre = npm ci
+commands =
+ black src
+ isort src
+ pflake8 src
+ npm run lint
+"""
 
