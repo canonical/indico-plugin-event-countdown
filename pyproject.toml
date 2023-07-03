@@ -66,9 +66,9 @@ allowlist_externals =
   npm
 commands_pre = npm ci
 commands =
- black src
- isort src
- pflake8 src
+ black indico_countdown_plugin
+ isort indico_countdown_plugin
+ pflake8 indico_countdown_plugin
  npm run lint
 """
 
