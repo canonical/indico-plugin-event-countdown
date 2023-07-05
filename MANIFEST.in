@@ -1,5 +1,4 @@
-graft indico_timer_plugin/templates
-graft indico_timer_plugin/static
-graft timer_plugin_clock.html
+graft indico_countdown_plugin/templates
+graft indico_countdown_plugin/translations
 
 global-exclude *.pyc __pycache__ .keep
