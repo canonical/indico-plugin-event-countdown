@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-html": "^7.1.0"
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-html": "^8.0.0"
   },
   "scripts": {
     "lint": "eslint --ext .html,.js indico_countdown_plugin"
